@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berlin Business Growth Analysis | Premium Strategy Consulting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --background: #0f0f23;
+            --surface: rgba(255, 255, 255, 0.05);
+            --surface-elevated: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
+            --border: rgba(255, 255, 255, 0.1);
+            --glow: rgba(99, 102, 241, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(6, 182, 212, 0.05) 0%, transparent 50%);
+            min-height: 100vh;
+        }
+
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3));
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-20px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(20px); opacity: 0; }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, 
+                rgba(99, 102, 241, 0.2) 0%, 
+                rgba(139, 92, 246, 0.2) 50%, 
+                rgba(6, 182, 212, 0.2) 100%);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid var(--border);
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-conic-gradient(
+                from 0deg at 50% 50%,
+                transparent 0deg,
+                rgba(99, 102, 241, 0.03) 30deg,
+                transparent 60deg
+            );
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
+        }
+
+        .logo-text {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            opacity: 0.9;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.025em;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            font-weight: 500;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--surface-elevated);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            opacity: 0.7;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .main-content {
+            padding: 0;
+        }
+
+        .intro-section {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .intro-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--primary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro-description {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-card {
+            background: var(--surface-elevated);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(99, 102, 241, 0.2);
+            border-color: var(--primary);
+        }
+
+        .benefit-card:hover::before {
+            left: 100%;
+        }
+
+        .benefit-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .benefit-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .benefit-description {
+            opacity: 0.8;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .question-section {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 3rem 2rem;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .question-section.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .question-section.current {
+            background: var(--surface-elevated);
+            backdrop-filter: blur(30px);
+            box-shadow: 0 0 0 1px var(--primary);
+        }
+
+        .question-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3rem;
+            gap: 1.5rem;
+        }
+
+        .question-number {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            box-shadow: 0 8px 32px var(--glow);
+            position: relative;
+        }
+
+        .question-number::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 18px;
+            z-index: -1;
+            opacity: 0.3;
+            filter: blur(8px);
+        }
+
+        .question-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        .options-container {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .option {
+            background: var(--surface-elevated);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            group: option;
+        }
+
+        .option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .option:hover {
+            border-color: var(--primary);
+            transform: translateX(8px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.2);
+        }
+
+        .option:hover::before {
+            left: 100%;
+        }
+
+        .option.selected {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, 
+                rgba(99, 102, 241, 0.1), 
+                rgba(139, 92, 246, 0.1));
+            box-shadow: 0 0 0 1px var(--primary), 0 12px 24px rgba(99, 102, 241, 0.3);
+            transform: translateX(12px);
+        }
+
+        .option-content {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .option-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            transition: transform 0.3s ease;
+        }
+
+        .option.selected .option-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .option-text {
+            flex: 1;
+            font-weight: 500;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .option input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .contact-section {
+            background: var(--surface-elevated);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid var(--border);
+            padding: 4rem 2rem;
+            display: none;
+        }
+
+        .contact-section.show {
+            display: block;
+            animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--primary));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1.5rem 1.5rem 1.5rem 0;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid var(--border);
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-bottom-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+        }
+
+        .form-label {
+            position: absolute;
+            top: 1.5rem;
+            left: 0;
+            color: var(--text-muted);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .form-input:focus + .form-label,
+        .form-input:not(:placeholder-shown) + .form-label {
+            top: -0.5rem;
+            font-size: 0.875rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            background: var(--surface-elevated);
+            backdrop-filter: blur(30px);
+            border-top: 1px solid var(--border);
+            position: sticky;
+            bottom: 0;
+        }
+
+        .nav-btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 8px 32px var(--glow);
+        }
+
+        .nav-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px var(--glow);
+        }
+
+        .nav-btn-secondary {
+            background: var(--surface-elevated);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .nav-btn-secondary:hover {
+            background: var(--surface);
+            border-color: var(--primary);
+            color: var(--text-primary);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .question-counter {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .results-section {
+            background: var(--surface-elevated);
+            backdrop-filter: blur(30px);
+            padding: 4rem 2rem;
+            text-align: center;
+            display: none;
+        }
+
+        .results-section.show {
+            display: block;
+            animation: slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .result-card {
+            background: var(--surface);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem auto;
+            max-width: 700px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 15, 35, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 3px solid var(--border);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 2rem;
+        }
+
+        .loading-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            opacity: 0.05;
+            animation: float 20s infinite linear;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            width: 100px;
+            height: 100px;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 60%;
+            right: 10%;
+            width: 60px;
+            height: 60px;
+            animation-delay: -7s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            width: 80px;
+            height: 80px;
+            animation-delay: -14s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-30px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(30px) rotate(240deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .question-section {
+                padding: 2rem 1rem;
+            }
+
+            .option {
+                padding: 1.25rem 1.5rem;
+            }
+
+            .option-content {
+                gap: 1rem;
+            }
+
+            .option-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .navigation {
+                padding: 1rem;
+            }
+
+            .nav-btn {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Ihre Strategieanalyse wird erstellt...</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header class="hero">
+            <div class="hero-content">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="logo-text">Berlin Business Growth</div>
+                </div>
+                <h1>Strategische Wachstumsanalyse</h1>
+                <p class="hero-subtitle">Evidenzbasierte Premium-Beratung für nachhaltiges Unternehmenswachstum im deutschen Markt</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Unternehmen analysiert</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">92%</span>
+                        <span class="stat-label">Wachstum erreicht</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Jahre Expertise</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <section class="intro-section">
+                <h2 class="intro-title">Premium Strategieanalyse</h2>
+                <p class="intro-description">Erhalten Sie eine maßgeschneiderte Wachstumsstrategie basierend auf bewährten Methoden und Marktdaten von über 500 erfolgreichen Berliner Unternehmen.</p>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="benefit-title">KI-gestützte Analyse</h3>
+                        <p class="benefit-description">Modernste Algorithmen analysieren Ihr Geschäftsmodell und identifizieren Wachstumspotentiale.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-target"></i>
+                        </div>
+                        <h3 class="benefit-title">Maßgeschneidert</h3>
+                        <p class="benefit-description">Individuelle Strategien basierend auf Ihrer Branche, Größe und spezifischen Herausforderungen.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3 class="benefit-title">Sofortige Umsetzung</h3>
+                        <p class="benefit-description">Konkrete Handlungsempfehlungen mit priorisierten Schritten für maximale Effizienz.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-shield-check"></i>
+                        </div>
+                        <h3 class="benefit-title">Bewährt & Sicher</h3>
+                        <p class="benefit-description">Strategien basierend auf 200+ erfolgreichen Implementierungen in Berlin.</p>
+                    </div>
+                </div>
+            </section>
+
+            <form id="assessmentForm">
+                <!-- Question 1 -->
+                <section class="question-section" data-question="1">
+                    <div class="question-header">
+                        <div class="question-number">1</div>
+                        <h3 class="question-title">Wie akquirieren Sie derzeit primär Ihre Kunden?</h3>
+                    </div>
+                    <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="acquisition" value="local" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-store"></i>
+                                </div>
+                                <div class="option-text">Lokale Präsenz und Laufkundschaft</div>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="acquisition" value="referrals" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                                <div class="option-text">Empfehlungen und Mundpropaganda</div>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="acquisition" value="digital" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div class="option-text">Digitale Kanäle und Social Media</div>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="acquisition" value="search" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                                <div class="option-text">Google und Online-Suche</div>
+                            </div>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Question 2 -->
+                <section class="question-section" data-question="2">
+                    <div class="question-header">
+                        <div class="question-number">2</div>
+                        <h3 class="question-title">Welche Marketingaktivitäten nutzen Sie bereits?</h3>
+                    </div>
+                    <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="marketing" value="comprehensive" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="option-text">Umfassende Marketingstrategie mit Analytics</div>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="marketing" value="basic" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-laptop"></i>
+                                </div>
+                                <div class="option-text">Grundlegende Online-Präsenz</div>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="marketing" value="minimal" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="option-text">Wenig Marketing aufgrund von Zeitmangel</div>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="marketing" value="none" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-question-circle"></i>
+                                </div>
+                                <div class="option-text">Noch keine strukturierten Maßnahmen</div>
+                            </div>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Question 3 -->
+                <section class="question-section" data-question="3">
+                    <div class="question-header">
+                        <div class="question-number">3</div>
+                        <h3 class="question-title">Wie schätzen Sie Ihre digitalen Fähigkeiten ein?</h3>
+                    </div>
+                    <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="digital_skills" value="expert" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-rocket"></i>
+                                </div>
+                                <div class="option-text">Fortgeschritten - Nutze Analytics und moderne Tools</div>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="digital_skills" value="intermediate" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div class="option-text">Solide Grundkenntnisse in digitalen Bereichen</div>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="digital_skills" value="basic" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-mobile"></i>
+                                </div>
+                                <div class="option-text">Grundlagen vorhanden, nutze aber wenig strategisch</div>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="digital_skills" value="learning" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="option-text">Lernbereit, aber wenig Erfahrung mit digitalen Tools</div>
+                            </div>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Question 4 -->
+                <section class="question-section" data-question="4">
+                    <div class="question-header">
+                        <div class="question-number">4</div>
+                        <h3 class="question-title">Wie treffen Sie strategische Geschäftsentscheidungen?</h3>
+                    </div>
+                    <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="decisions" value="data" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <div class="option-text">Datenbasiert mit KPIs und Analytics</div>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="decisions" value="consultative" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="option-text">Nach Beratung mit Experten und Stakeholdern</div>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="decisions" value="research" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-search-plus"></i>
+                                </div>
+                                <div class="option-text">Nach gründlicher Marktforschung</div>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="decisions" value="intuitive" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="option-text">Auf Basis von Erfahrung und Intuition</div>
+                            </div>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Question 5 -->
+                <section class="question-section" data-question="5">
+                    <div class="question-header">
+                        <div class="question-number">5</div>
+                        <h3 class="question-title">Was ist Ihre prioritäre Geschäftsherausforderung?</h3>
+                    </div>
+                    <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="challenge" value="customers" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-bullseye"></i>
+                                </div>
+                                <div class="option-text">Mehr qualifizierte Kunden gewinnen</div>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="challenge" value="revenue" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                                <div class="option-text">Umsatz pro Kunde steigern</div>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="challenge" value="efficiency" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-cogs"></i>
+                                </div>
+                                <div class="option-text">Betriebseffizienz verbessern</div>
+                            </div>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="challenge" value="competition" required>
+                            <div class="option-content">
+                                <div class="option-icon">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <div class="option-text">Sich von der Konkurrenz differenzieren</div>
+                            </div>
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Contact Section -->
+                <section class="contact-section" id="contactSection">
+                    <div class="contact-header">
+                        <h2 class="contact-title">Ihre Premium-Strategieanalyse erhalten</h2>
+                        <p class="contact-subtitle">Unsere Experten erstellen eine personalisierte Wachstumsstrategie für Ihr Unternehmen</p>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="firstName" placeholder=" " required>
+                            <label class="form-label">Vorname</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="lastName" placeholder=" " required>
+                            <label class="form-label">Nachname</label>
+                        </div>
+                        <div class="form-group full-width">
+                            <input type="email" class="form-input" name="email" placeholder=" " required>
+                            <label class="form-label">Geschäftliche E-Mail-Adresse</label>
+                        </div>
+                        <div class="form-group full-width">
+                            <input type="text" class="form-input" name="business" placeholder=" " required>
+                            <label class="form-label">Unternehmensname</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="position" placeholder=" " required>
+                            <label class="form-label">Position im Unternehmen</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-input" name="phone" placeholder=" ">
+                            <label class="form-label">Telefonnummer (optional)</label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section class="results-section" id="resultsSection">
+                    <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 2rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Ihre Premium-Strategieanalyse</h2>
+                    <div id="resultsContent"></div>
+                </section>
+            </form>
+        </main>
+
+        <nav class="navigation">
+            <button type="button" class="nav-btn nav-btn-secondary" id="prevBtn" style="display: none;">
+                <i class="fas fa-arrow-left" style="margin-right: 0.5rem;"></i>Zurück
+            </button>
+            <div style="flex: 1; text-align: center;">
+                <span id="questionCounter" class="question-counter">Frage 1 von 5</span>
+            </div>
+            <button type="button" class="nav-btn nav-btn-primary" id="nextBtn">
+                Weiter<i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>
+            </button>
+        </nav>
+    </div>
+
+    <script>
+        class PremiumAssessment {
+            constructor() {
+                this.currentQuestion = 1;
+                this.totalQuestions = 5;
+                this.answers = {};
+                this.init();
+            }
+
+            init() {
+                this.showQuestion(1);
+                this.updateProgress();
+                this.bindEvents();
+                this.createFloatingElements();
+            }
+
+            createFloatingElements() {
+                // Add more floating elements for enhanced visual appeal
+                const container = document.querySelector('.floating-elements');
+                for (let i = 0; i < 3; i++) {
+                    const element = document.createElement('div');
+                    element.className = 'floating-element';
+                    element.style.top = Math.random() * 100 + '%';
+                    element.style.left = Math.random() * 100 + '%';
+                    element.style.animationDelay = -Math.random() * 20 + 's';
+                    container.appendChild(element);
+                }
+            }
+
+            bindEvents() {
+                document.getElementById('nextBtn').addEventListener('click', () => this.nextQuestion());
+                document.getElementById('prevBtn').addEventListener('click', () => this.prevQuestion());
+                
+                // Radio button changes
+                document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                    radio.addEventListener('change', (e) => {
+                        this.handleAnswerChange(e);
+                        this.updateNextButton();
+                    });
+                });
+
+                // Enhanced keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (this.currentQuestion <= this.totalQuestions) {
+                            const currentInput = document.querySelector(`[data-question="${this.currentQuestion}"] input[type="radio"]:checked`);
+                            if (currentInput) {
+                                this.nextQuestion();
+                            }
+                        } else {
+                            const requiredFields = document.querySelectorAll('#contactSection input[required]');
+                            const allFilled = Array.from(requiredFields).every(field => field.value.trim() !== '');
+                            if (allFilled) {
+                                this.generateResults();
+                            }
+                        }
+                    }
+                });
+
+                // Arrow key navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        if (this.currentQuestion <= this.totalQuestions) {
+                            const currentInput = document.querySelector(`[data-question="${this.currentQuestion}"] input[type="radio"]:checked`);
+                            if (currentInput) {
+                                this.nextQuestion();
+                            }
+                        }
+                    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        if (this.currentQuestion > 1) {
+                            this.prevQuestion();
+                        }
+                    }
+                });
+
+                // Form submission
+                document.getElementById('assessmentForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.generateResults();
+                });
+
+                // Form input updates
+                document.querySelectorAll('#contactSection input').forEach(input => {
+                    input.addEventListener('input', () => this.updateNextButton());
+                });
+            }
+
+            handleAnswerChange(e) {
+                const questionSection = e.target.closest('.question-section');
+                
+                // Remove selected class from all options in this question
+                questionSection.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                
+                // Add selected class to chosen option with enhanced animation
+                const selectedOption = e.target.closest('.option');
+                selectedOption.classList.add('selected');
+                
+                // Store answer
+                this.answers[e.target.name] = e.target.value;
+                
+                // Enhanced auto-advance with sound-like feedback
+                setTimeout(() => {
+                    if (this.currentQuestion <= this.totalQuestions) {
+                        this.nextQuestion();
+                    }
+                }, 1000);
+            }
+
+            showQuestion(questionNum) {
+                // Hide all questions with staggered animation
+                document.querySelectorAll('.question-section').forEach((section, index) => {
+                    setTimeout(() => {
+                        section.classList.remove('visible', 'current');
+                    }, index * 50);
+                });
+
+                // Hide contact section
+                document.getElementById('contactSection').classList.remove('show');
+
+                if (questionNum <= this.totalQuestions) {
+                    // Show current question with enhanced animation
+                    const currentSection = document.querySelector(`[data-question="${questionNum}"]`);
+                    if (currentSection) {
+                        setTimeout(() => {
+                            currentSection.classList.add('visible', 'current');
+                            // Enhanced scroll with perfect timing
+                            currentSection.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'center',
+                                inline: 'nearest'
+                            });
+                        }, 150);
+                    }
+                } else {
+                    // Show contact form with enhanced animation
+                    const contactSection = document.getElementById('contactSection');
+                    setTimeout(() => {
+                        contactSection.classList.add('show');
+                        contactSection.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start',
+                            inline: 'nearest'
+                        });
+                    }, 150);
+                }
+
+                this.updateNavigation();
+                this.updateProgress();
+            }
+
+            nextQuestion() {
+                if (this.currentQuestion <= this.totalQuestions) {
+                    const currentInput = document.querySelector(`[data-question="${this.currentQuestion}"] input[type="radio"]:checked`);
+                    if (!currentInput) {
+                        this.showError('Bitte wählen Sie eine Antwort aus.');
+                        return;
+                    }
+                }
+
+                this.currentQuestion++;
+                this.showQuestion(this.currentQuestion);
+            }
+
+            prevQuestion() {
+                if (this.currentQuestion > 1) {
+                    this.currentQuestion--;
+                    this.showQuestion(this.currentQuestion);
+                }
+            }
+
+            updateNavigation() {
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                const counter = document.getElementById('questionCounter');
+
+                // Previous button with enhanced styling
+                prevBtn.style.display = this.currentQuestion > 1 ? 'block' : 'none';
+
+                // Next button with dynamic content
+                if (this.currentQuestion <= this.totalQuestions) {
+                    nextBtn.innerHTML = 'Weiter<i class="fas fa-arrow-right" style="margin-left: 0.5rem;"></i>';
+                    nextBtn.type = 'button';
+                } else {
+                    nextBtn.innerHTML = '<i class="fas fa-magic" style="margin-right: 0.5rem;"></i>Analyse erstellen';
+                    nextBtn.type = 'submit';
+                }
+
+                // Counter with enhanced styling
+                if (this.currentQuestion <= this.totalQuestions) {
+                    counter.textContent = `Frage ${this.currentQuestion} von ${this.totalQuestions}`;
+                } else {
+                    counter.textContent = 'Kontaktdaten';
+                }
+
+                this.updateNextButton();
+            }
+
+            updateNextButton() {
+                const nextBtn = document.getElementById('nextBtn');
+                
+                if (this.currentQuestion <= this.totalQuestions) {
+                    const currentInput = document.querySelector(`[data-question="${this.currentQuestion}"] input[type="radio"]:checked`);
+                    nextBtn.disabled = !currentInput;
+                } else {
+                    const requiredFields = document.querySelectorAll('#contactSection input[required]');
+                    const allFilled = Array.from(requiredFields).every(field => field.value.trim() !== '');
+                    nextBtn.disabled = !allFilled;
+                }
+            }
+
+            updateProgress() {
+                const progress = (this.currentQuestion - 1) / this.totalQuestions * 100;
+                document.getElementById('progressBar').style.width = `${Math.min(progress, 100)}%`;
+            }
+
+            showError(message) {
+                // Enhanced error display could be added here
+                alert(message);
+            }
+
+            showLoading() {
+                document.getElementById('loadingOverlay').style.display = 'flex';
+            }
+
+            hideLoading() {
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }
+
+            generateResults() {
+                this.showLoading();
+
+                // Collect form data
+                const formData = new FormData(document.getElementById('assessmentForm'));
+                const contactData = Object.fromEntries(formData.entries());
+
+                // Enhanced loading simulation
+                setTimeout(() => {
+                    this.hideLoading();
+                    this.showResults(contactData);
+                }, 3000);
+            }
+
+            showResults(contactData) {
+                const analysis = this.analyzeAnswers(contactData);
+                
+                // Hide everything else with animation
+                document.querySelectorAll('.question-section, .contact-section').forEach(el => {
+                    el.style.display = 'none';
+                });
+                document.querySelector('.navigation').style.display = 'none';
+
+                // Show results with enhanced content
+                const resultsSection = document.getElementById('resultsSection');
+                const resultsContent = document.getElementById('resultsContent');
+                
+                resultsContent.innerHTML = `
+                    <div class="result-card">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.5rem;">
+                            <i class="fas fa-check-circle" style="margin-right: 0.5rem;"></i>
+                            Vielen Dank, ${contactData.firstName}!
+                        </h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.1rem;">
+                            Ihre personalisierte Premium-Strategieanalyse für <strong style="color: var(--primary);">${contactData.business}</strong> wurde erfolgreich erstellt.
+                        </p>
+                    </div>
+
+                    <div class="result-card">
+                        <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-size: 1.4rem;">
+                            <i class="fas fa-user-tie" style="margin-right: 0.5rem; color: var(--primary);"></i>
+                            Ihr Unternehmenstyp
+                        </h3>
+                        <div style="background: var(--surface-elevated); padding: 2rem; border-radius: 12px; border-left: 4px solid var(--primary);">
+                            <h4 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.2rem;">${analysis.type.name}</h4>
+                            <p style="color: var(--text-secondary); line-height: 1.6;">${analysis.type.description}</p>
+                        </div>
+                    </div>
+
+                    <div class="result-card">
+                        <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-size: 1.4rem;">
+                            <i class="fas fa-lightbulb" style="margin-right: 0.5rem; color: var(--secondary);"></i>
+                            Ihre strategischen Empfehlungen
+                        </h3>
+                        ${analysis.recommendations.map((rec, i) => `
+                            <div style="background: var(--surface-elevated); padding: 1.5rem; border-radius: 12px; margin: 1rem 0; border-left: 4px solid var(--secondary);">
+                                <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                                    <div style="width: 32px; height: 32px; background: linear-gradient(135deg, var(--secondary), var(--accent)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem; color: white; font-weight: bold;">
+                                        ${i + 1}
+                                    </div>
+                                    <strong style="color: var(--primary); font-size: 1.1rem;">${rec.title}</strong>
+                                </div>
+                                <p style="color: var(--text-secondary); margin-left: 3rem; line-height: 1.6;">${rec.description}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div class="result-card">
+                        <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; font-size: 1.4rem;">
+                            <i class="fas fa-rocket" style="margin-right: 0.5rem; color: var(--success);"></i>
+                            Nächste Schritte
+                        </h3>
+                        <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 3rem; border-radius: 16px; text-align: center; color: white;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">Premium-Strategieberatung</h4>
+                            <p style="margin-bottom: 2rem; opacity: 0.9; line-height: 1.6; font-size: 1.1rem;">
+                                Unsere Senior-Berater kontaktieren Sie innerhalb von 24 Stunden für ein exklusives 45-Minuten Strategiegespräch.
+                            </p>
+                            <div style="background: rgba(255,255,255,0.15); padding: 1.5rem; border-radius: 12px; backdrop-filter: blur(10px);">
+                                <p style="margin: 0; font-weight: 600; font-size: 1.1rem;">
+                                    <i class="fas fa-envelope-check" style="margin-right: 0.5rem;"></i>
+                                    Detaillierte Strategieanalyse per E-Mail versendet
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin: 3rem 0; padding: 2rem; background: var(--surface-elevated); border-radius: 16px; border: 1px solid var(--border);">
+                        <div style="font-size: 2rem; margin-bottom: 1rem; color: var(--primary);">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1.2rem;">Berlin Business Growth</h4>
+                        <p style="color: var(--text-secondary); margin: 0; line-height: 1.6;">
+                            Premium-Strategieberatung für nachhaltiges Unternehmenswachstum<br>
+                            <strong>Seit 2008 • 500+ erfolgreiche Projekte • Berlin</strong>
+                        </p>
+                    </div>
+                `;
+
+                resultsSection.classList.add('show');
+                
+                // Update progress to 100%
+                document.getElementById('progressBar').style.width = '100%';
+
+                // Enhanced scroll to results
+                setTimeout(() => {
+                    resultsSection.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start'
+                    });
+                }, 300);
+
+                // Log the lead
+                console.log('Premium Lead:', { ...contactData, answers: this.answers, analysis });
+            }
+
+            analyzeAnswers(contactData) {
+                const type = this.classifyBusinessType();
+                const recommendations = this.generateRecommendations();
+                
+                return { type, recommendations };
+            }
+
+            classifyBusinessType() {
+                const acquisition = this.answers.acquisition;
+                const digitalSkills = this.answers.digital_skills;
+                
+                if (digitalSkills === 'expert' && this.answers.marketing === 'comprehensive') {
+                    return {
+                        name: 'Digital-Native Premium-Unternehmen',
+                        description: 'Ihr Unternehmen verfügt über fortgeschrittene digitale Kompetenzen und nutzt bereits datenbasierte Strategien. Sie sind optimal positioniert für Premium-Wachstumsstrategien und Marktführerschaft in Ihrem Segment.'
+                    };
+                } else if (acquisition === 'local' && digitalSkills === 'learning') {
+                    return {
+                        name: 'Traditionelles Unternehmen mit Premium-Digitalisierungspotential',
+                        description: 'Ihr Unternehmen hat eine exzellente lokale Marktposition aufgebaut. Durch strategische Digitalisierung und moderne Kundenakquisition können Sie Ihre Reichweite exponentiell erweitern.'
+                    };
+                } else {
+                    return {
+                        name: 'Wachstumsorientiertes Premium-Hybrid-Unternehmen',
+                        description: 'Ihr Unternehmen befindet sich in einer idealen Position für strategisches Premium-Wachstum. Mit der richtigen Beratung können Sie traditionelle Stärken optimal mit innovativen Ansätzen kombinieren.'
+                    };
+                }
+            }
+
+            generateRecommendations() {
+                const recs = [];
+                
+                if (this.answers.challenge === 'customers') {
+                    recs.push({
+                        title: 'Premium Multi-Channel Kundenakquisition',
+                        description: 'Entwicklung einer hochmodernen Akquisitionsstrategie mit KI-gestützter Zielgruppenanalyse und automatisierten Conversion-Funnels für nachhaltig qualifizierte Leads.'
+                    });
+                }
+                
+                if (this.answers.digital_skills === 'learning' || this.answers.digital_skills === 'basic') {
+                    recs.push({
+                        title: 'Strategische Digital-Transformation',
+                        description: 'Systematischer Aufbau einer erstklassigen digitalen Infrastruktur mit modernen Analytics, Customer Journey Mapping und Performance-optimierten Touchpoints.'
+                    });
+                }
+                
+                if (this.answers.marketing === 'minimal' || this.answers.marketing === 'none') {
+                    recs.push({
+                        title: 'Premium Marketing-Ecosystem',
+                        description: 'Implementierung eines ganzheitlichen Marketing-Frameworks mit automatisierten Workflows, Predictive Analytics und ROI-optimierten Kampagnen für maximale Effizienz.'
+                    });
+                }
+                
+                // Ensure we always have 3 premium recommendations
+                while (recs.length < 3) {
+                    recs.push({
+                        title: 'Operational Excellence Optimization',
+                        description: 'Systematische Optimierung Ihrer Geschäftsprozesse durch moderne Automatisierung und KPI-basierte Performance-Steigerung für nachhaltige Wettbewerbsvorteile.'
+                    });
+                }
+                
+                return recs.slice(0, 3);
+            }
+        }
+
+        // Initialize the premium assessment
+        document.addEventListener('DOMContentLoaded', () => {
+            new PremiumAssessment();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berlin Business Growth Assessment - Kostenlose Analyse</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            padding: 40px 30px;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .question h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option:hover {
+            border-color: #3498db;
+            background: #f0f8ff;
+        }
+        
+        .option input[type="radio"] {
+            margin-right: 12px;
+            scale: 1.2;
+        }
+        
+        .option label {
+            cursor: pointer;
+            flex-grow: 1;
+        }
+        
+        .contact-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        .contact-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .contact-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .contact-inputs input {
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+        
+        .contact-inputs input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        .business-input {
+            grid-column: 1 / -1;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        .benefits {
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #27ae60;
+        }
+        
+        .benefits h4 {
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+        
+        .benefits ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .benefits li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .benefits li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .privacy-note {
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f1f2f6;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 600px) {
+            .contact-inputs {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Berlin Business Growth Assessment</h1>
+            <p>Kostenlose 5-Minuten Analyse • Erhalten Sie personalisierte Wachstumsempfehlungen</p>
+        </div>
+        
+        <div class="form-container">
+            <div class="benefits">
+                <h4>Was Sie erhalten:</h4>
+                <ul>
+                    <li>Personalisierte Wachstumsstrategie für Ihr Business</li>
+                    <li>3 konkrete Empfehlungen für mehr Kunden</li>
+                    <li>Benchmark mit ähnlichen Berlin Businesses</li>
+                    <li>Sofortige Ergebnisse per Email</li>
+                </ul>
+            </div>
+            
+            <form id="assessmentForm">
+                <div class="question">
+                    <h3>1. Wie finden die meisten Ihrer Kunden zu Ihnen?</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="acquisition_foottraffic" name="customer_acquisition" value="foot_traffic">
+                            <label for="acquisition_foottraffic">🚶‍♀️ Laufkundschaft (Menschen gehen vorbei)</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="acquisition_wordofmouth" name="customer_acquisition" value="word_of_mouth">
+                            <label for="acquisition_wordofmouth">💬 Mundpropaganda/Empfehlungen</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="acquisition_social" name="customer_acquisition" value="social_media">
+                            <label for="acquisition_social">📱 Social Media (Instagram, Facebook)</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="acquisition_google" name="customer_acquisition" value="google_search">
+                            <label for="acquisition_google">🔍 Google Suche</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="acquisition_other" name="customer_acquisition" value="other">
+                            <label for="acquisition_other">🤔 Andere/Bin mir nicht sicher</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>2. Was haben Sie bereits versucht, um mehr Kunden zu gewinnen?</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="tried_social" name="previous_attempts" value="social_media_posts">
+                            <label for="tried_social">📸 Facebook/Instagram Posts</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="tried_ads" name="previous_attempts" value="online_ads">
+                            <label for="tried_ads">💰 Google/Facebook Werbung</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="tried_partnerships" name="previous_attempts" value="local_partnerships">
+                            <label for="tried_partnerships">🤝 Lokale Partnerschaften</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="tried_nothing" name="previous_attempts" value="nothing_too_busy">
+                            <label for="tried_nothing">⏰ Noch nichts - zu beschäftigt mit dem Geschäft</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="tried_other" name="previous_attempts" value="other">
+                            <label for="tried_other">🔄 Anderes</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>3. Wie wohl fühlen Sie sich mit digitalem Marketing?</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="tech_comfortable" name="tech_comfort" value="very_comfortable">
+                            <label for="tech_comfortable">😎 Sehr wohl - Ich manage unsere Social Media</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="tech_somewhat" name="tech_comfort" value="somewhat_comfortable">
+                            <label for="tech_somewhat">🙂 Einigermaßen - Ich nutze Apps, aber nicht fürs Business</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="tech_uncomfortable" name="tech_comfort" value="not_comfortable">
+                            <label for="tech_uncomfortable">😐 Nicht wohl - Ich bevorzuge traditionelle Methoden</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="tech_confused" name="tech_comfort" value="what_is_digital">
+                            <label for="tech_confused">🤷‍♀️ Was ist digitales Marketing? 😊</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>4. Bei Business-Entscheidungen...</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="decision_fast" name="decision_style" value="decide_quickly">
+                            <label for="decision_fast">⚡ Entscheide ich schnell und probiere Dinge aus</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="decision_research" name="decision_style" value="research_thoroughly">
+                            <label for="decision_research">🔍 Recherchiere ich erst gründlich</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="decision_discuss" name="decision_style" value="discuss_with_others">
+                            <label for="decision_discuss">👥 Bespreche ich mit Familie/Geschäftspartner</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="decision_gut" name="decision_style" value="gut_feeling">
+                            <label for="decision_gut">💭 Gehe ich nach Bauchgefühl</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>5. Was ist Ihre größte Herausforderung gerade?</h3>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="challenge_customers" name="biggest_challenge" value="not_enough_customers">
+                            <label for="challenge_customers">👥 Nicht genug Kunden</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="challenge_spending" name="biggest_challenge" value="customers_not_spending">
+                            <label for="challenge_spending">💸 Kunden geben nicht genug aus</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="challenge_efficiency" name="biggest_challenge" value="need_efficiency">
+                            <label for="challenge_efficiency">⏱️ Zu beschäftigt - brauche mehr Effizienz</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="challenge_competition" name="biggest_challenge" value="competition">
+                            <label for="challenge_competition">🏪 Konkurrenz von Ketten/Apps</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="challenge_other" name="biggest_challenge" value="other">
+                            <label for="challenge_other">🤔 Anderes</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-section">
+                    <h3>📧 Erhalten Sie Ihre kostenlosen Empfehlungen</h3>
+                    <div class="contact-inputs">
+                        <input type="text" id="firstName" name="firstName" placeholder="Vorname" required>
+                        <input type="text" id="lastName" name="lastName" placeholder="Nachname" required>
+                        <input type="email" id="email" name="email" placeholder="Email Adresse" required class="business-input">
+                        <input type="text" id="businessName" name="businessName" placeholder="Name Ihres Business" required class="business-input">
+                        <input type="tel" id="whatsapp" name="whatsapp" placeholder="WhatsApp Nummer (optional)" class="business-input">
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    🚀 Meine kostenlosen Empfehlungen erhalten
+                </button>
+
+                <div class="privacy-note">
+                    🔒 Ihre Daten sind sicher. Wir verwenden sie nur zur Erstellung Ihrer personalisierten Empfehlungen. Kein Spam, versprochen!
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('assessmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Validate required fields
+            if (!data.firstName || !data.lastName || !data.email || !data.businessName) {
+                alert('Bitte füllen Sie alle erforderlichen Felder aus.');
+                return;
+            }
+            
+            // Generate personalized results
+            const results = generatePersonalizedResults(data);
+            
+            // Store data (in real implementation, this would go to your database)
+            console.log('Assessment Data:', data);
+            console.log('Generated Results:', results);
+            
+            // Simulate sending email and show success message
+            showSuccessMessage(data.firstName, results);
+        });
+
+        function generatePersonalizedResults(data) {
+            // Business type classification
+            let businessType = classifyBusinessType(data);
+            let recommendations = generateRecommendations(data, businessType);
+            let nextSteps = generateNextSteps(data, businessType);
+            
+            return {
+                businessType: businessType,
+                recommendations: recommendations,
+                nextSteps: nextSteps,
+                priorityLevel: calculatePriorityLevel(data)
+            };
+        }
+
+        function classifyBusinessType(data) {
+            if (data.tech_comfort === 'very_comfortable' && data.customer_acquisition === 'social_media') {
+                return {
+                    type: 'Digital Native',
+                    description: 'Sie nutzen bereits digitale Kanäle gut und können diese optimieren.'
+                };
+            } else if (data.tech_comfort === 'not_comfortable' && data.customer_acquisition === 'foot_traffic') {
+                return {
+                    type: 'Traditional Business',
+                    description: 'Sie haben eine starke lokale Präsenz und können von digitaler Ergänzung profitieren.'
+                };
+            } else {
+                return {
+                    type: 'Hybrid Business',
+                    description: 'Sie haben sowohl traditionelle als auch digitale Potentiale.'
+                };
+            }
+        }
+
+        function generateRecommendations(data, businessType) {
+            let recs = [];
+            
+            // Based on customer acquisition method
+            if (data.customer_acquisition === 'foot_traffic') {
+                recs.push('🏪 Optimieren Sie Ihre Google Business Präsenz für lokale Suchen');
+                recs.push('📸 Nutzen Sie Instagram für visuelle Kundenbindung');
+            } else if (data.customer_acquisition === 'word_of_mouth') {
+                recs.push('⭐ Implementieren Sie ein systematisches Review-Management');
+                recs.push('🎁 Erstellen Sie ein Empfehlungsprogramm für bestehende Kunden');
+            }
+            
+            // Based on tech comfort
+            if (data.tech_comfort === 'very_comfortable') {
+                recs.push('📊 Nutzen Sie Analytics für datenbasierte Entscheidungen');
+            } else if (data.tech_comfort === 'not_comfortable') {
+                recs.push('🤝 Starten Sie mit einfachen, bewährten digitalen Tools');
+            }
+            
+            // Based on biggest challenge
+            if (data.biggest_challenge === 'not_enough_customers') {
+                recs.push('🎯 Fokussieren Sie auf lokale SEO und Google Ads');
+            } else if (data.biggest_challenge === 'competition') {
+                recs.push('💎 Entwickeln Sie ein einzigartiges Wertversprechen');
+            }
+            
+            return recs.slice(0, 3); // Return top 3 recommendations
+        }
+
+        function generateNextSteps(data, businessType) {
+            let steps = [];
+            
+            if (data.previous_attempts === 'nothing_too_busy') {
+                steps.push('Starten Sie mit Google My Business Optimierung (30 Minuten Setup)');
+                steps.push('Sammeln Sie systematisch Kundenbewertungen');
+            } else {
+                steps.push('Analysieren Sie die Performance Ihrer bisherigen Maßnahmen');
+                steps.push('Fokussieren Sie auf die profitabelsten Kanäle');
+            }
+            
+            steps.push('Implementieren Sie ein einfaches Kundenfeedback-System');
+            
+            return steps;
+        }
+
+        function calculatePriorityLevel(data) {
+            let score = 0;
+            
+            // Higher priority for businesses that need help
+            if (data.biggest_challenge === 'not_enough_customers') score += 3;
+            if (data.previous_attempts === 'nothing_too_busy') score += 2;
+            if (data.customer_acquisition === 'foot_traffic') score += 2;
+            if (data.tech_comfort === 'not_comfortable') score += 1;
+            
+            if (score >= 5) return 'HIGH';
+            if (score >= 3) return 'MEDIUM';
+            return 'LOW';
+        }
+
+        function showSuccessMessage(firstName, results) {
+            const formContainer = document.querySelector('.form-container');
+            formContainer.innerHTML = `
+                <div style="text-align: center; padding: 40px 20px;">
+                    <h2 style="color: #27ae60; margin-bottom: 20px;">🎉 Vielen Dank, ${firstName}!</h2>
+                    
+                    <div style="background: #f8f9fa; padding: 30px; border-radius: 15px; margin: 20px 0; text-align: left;">
+                        <h3 style="color: #2c3e50; margin-bottom: 15px;">Ihr Business-Typ: ${results.businessType.type}</h3>
+                        <p style="margin-bottom: 20px;">${results.businessType.description}</p>
+                        
+                        <h4 style="color: #3498db; margin-bottom: 10px;">🎯 Ihre Top 3 Empfehlungen:</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            ${results.recommendations.map(rec => `<li style="padding: 8px 0; border-bottom: 1px solid #eee;">✓ ${rec}</li>`).join('')}
+                        </ul>
+                        
+                        <h4 style="color: #e67e22; margin: 20px 0 10px 0;">📋 Nächste Schritte:</h4>
+                        <ol style="padding-left: 20px;">
+                            ${results.nextSteps.map(step => `<li style="padding: 5px 0;">${step}</li>`).join('')}
+                        </ol>
+                    </div>
+                    
+                    <div style="background: #e8f5e8; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <h4 style="color: #27ae60;">📧 Check Ihre Email!</h4>
+                        <p>Wir haben Ihnen einen detaillierten Report mit allen Empfehlungen gesendet.</p>
+                    </div>
+                    
+                    <div style="background: #fff3cd; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <h4 style="color: #856404;">🚀 Kostenlose Beratung gewünscht?</h4>
+                        <p>Basierend auf Ihren Antworten haben Sie <strong>${results.priorityLevel}</strong> Priorität für unsere kostenlosen 15-Minuten Strategiegespräche.</p>
+                        <p>Wir melden uns in den nächsten 24 Stunden bei Ihnen!</p>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

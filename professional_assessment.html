@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berlin Business Growth Analysis | Strategische Unternehmensberatung</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.5;
+            color: #1a1a1a;
+            background: #fafafa;
+            font-weight: 400;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            color: white;
+            padding: 60px 40px 50px;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        
+        .company-logo {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.025em;
+        }
+        
+        .header .subtitle {
+            font-size: 1.25rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+        
+        .header .description {
+            font-size: 1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-section {
+            padding: 50px 40px;
+        }
+        
+        .section-intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-intro h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+        
+        .section-intro p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin: 40px 0;
+        }
+        
+        .benefit-item {
+            padding: 24px;
+            background: #f8fafc;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .benefit-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .benefit-title {
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        
+        .benefit-desc {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .question-container {
+            margin-bottom: 40px;
+            padding: 32px;
+            background: #ffffff;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .question-container:hover {
+            border-color: #1e40af;
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.1);
+        }
+        
+        .question-number {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background: #1e40af;
+            color: white;
+            border-radius: 50%;
+            font-weight: 600;
+            font-size: 0.9rem;
+            line-height: 32px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        
+        .question-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .options-grid {
+            display: grid;
+            gap: 12px;
+        }
+        
+        .option-item {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            background: #fafafa;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .option-item:hover {
+            background: #f1f5f9;
+            border-color: #1e40af;
+        }
+        
+        .option-item input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .option-item input[type="radio"]:checked + .option-content {
+            color: #1e40af;
+        }
+        
+        .option-item input[type="radio"]:checked {
+            background: #1e40af;
+        }
+        
+        .option-item.selected {
+            background: #eff6ff;
+            border-color: #1e40af;
+        }
+        
+        .option-content {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            color: #374151;
+            width: 100%;
+        }
+        
+        .option-icon {
+            margin-right: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .contact-section {
+            background: #f8fafc;
+            padding: 40px 32px;
+            border-radius: 16px;
+            margin: 50px 0;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .contact-section h3 {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        
+        .contact-section .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 32px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-full {
+            grid-column: 1 / -1;
+        }
+        
+        .input-group {
+            position: relative;
+        }
+        
+        .input-group label {
+            display: block;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+            background: white;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #1e40af;
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+        
+        .submit-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            color: white;
+            padding: 18px 48px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+            min-width: 280px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 64, 175, 0.4);
+        }
+        
+        .privacy-notice {
+            margin-top: 24px;
+            padding: 20px;
+            background: #f1f5f9;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: #64748b;
+            text-align: center;
+            border-left: 4px solid #1e40af;
+        }
+        
+        .trust-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .trust-item {
+            text-align: center;
+            color: #666;
+        }
+        
+        .trust-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e40af;
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+            }
+            
+            .header {
+                padding: 40px 24px 30px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-section {
+                padding: 40px 24px;
+            }
+            
+            .question-container {
+                padding: 24px;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .trust-indicators {
+                gap: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="company-logo">BERLIN BUSINESS GROWTH</div>
+                <h1>Strategische Wachstumsanalyse</h1>
+                <p class="subtitle">Professionelle Unternehmensberatung für den Berliner Markt</p>
+                <p class="description">Evidenzbasierte Analyse Ihres Geschäftsmodells mit maßgeschneiderten Wachstumsempfehlungen von erfahrenen Strategieberatern.</p>
+            </div>
+        </header>
+        
+        <main class="form-section">
+            <div class="section-intro">
+                <h2>Kostenlose Strategieanalyse</h2>
+                <p>Basierend auf unserer Analyse von über 500 Berliner Unternehmen verschiedener Branchen entwickeln wir eine personalisierte Wachstumsstrategie für Ihr Unternehmen.</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <span class="benefit-icon">📊</span>
+                    <div class="benefit-title">Datenbasierte Analyse</div>
+                    <div class="benefit-desc">Fundierte Empfehlungen basierend auf Marktdaten</div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">🎯</span>
+                    <div class="benefit-title">Maßgeschneidert</div>
+                    <div class="benefit-desc">Individuelle Strategien für Ihre Branche</div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">⚡</span>
+                    <div class="benefit-title">Sofortige Ergebnisse</div>
+                    <div class="benefit-desc">Konkrete Handlungsempfehlungen</div>
+                </div>
+                <div class="benefit-item">
+                    <span class="benefit-icon">🏆</span>
+                    <div class="benefit-title">Bewährt</div>
+                    <div class="benefit-desc">Erfolgreich bei 200+ Unternehmen</div>
+                </div>
+            </div>
+            
+            <form id="strategieAnalyse">
+                <div class="question-container">
+                    <span class="question-number">1</span>
+                    <h3 class="question-title">Wie akquirieren Sie derzeit primär Ihre Kunden?</h3>
+                    <div class="options-grid">
+                        <label class="option-item">
+                            <input type="radio" name="customer_acquisition" value="foot_traffic">
+                            <div class="option-content">
+                                <span class="option-icon">🏪</span>
+                                Laufkundschaft und lokale Präsenz
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="customer_acquisition" value="word_of_mouth">
+                            <div class="option-content">
+                                <span class="option-icon">💬</span>
+                                Empfehlungsmarketing und Mundpropaganda
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="customer_acquisition" value="digital_marketing">
+                            <div class="option-content">
+                                <span class="option-icon">📱</span>
+                                Digitale Marketingkanäle (Social Media, Website)
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="customer_acquisition" value="search_engines">
+                            <div class="option-content">
+                                <span class="option-icon">🔍</span>
+                                Suchmaschinenmarketing (Google, Online-Suche)
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="customer_acquisition" value="traditional_advertising">
+                            <div class="option-content">
+                                <span class="option-icon">📰</span>
+                                Traditionelle Werbung (Print, Radio, Direktwerbung)
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question-container">
+                    <span class="question-number">2</span>
+                    <h3 class="question-title">Welche Marketingmaßnahmen haben Sie bereits implementiert?</h3>
+                    <div class="options-grid">
+                        <label class="option-item">
+                            <input type="radio" name="previous_attempts" value="comprehensive_strategy">
+                            <div class="option-content">
+                                <span class="option-icon">📈</span>
+                                Umfassende Marketingstrategie mit verschiedenen Kanälen
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="previous_attempts" value="basic_digital">
+                            <div class="option-content">
+                                <span class="option-icon">💻</span>
+                                Grundlegende digitale Präsenz (Website, Social Media)
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="previous_attempts" value="occasional_advertising">
+                            <div class="option-content">
+                                <span class="option-icon">📢</span>
+                                Gelegentliche Werbemaßnahmen ohne systematischen Ansatz
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="previous_attempts" value="minimal_effort">
+                            <div class="option-content">
+                                <span class="option-icon">⏰</span>
+                                Begrenzte Marketingaktivitäten aufgrund von Zeitbeschränkungen
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="previous_attempts" value="no_marketing">
+                            <div class="option-content">
+                                <span class="option-icon">🤔</span>
+                                Noch keine strukturierten Marketingmaßnahmen
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question-container">
+                    <span class="question-number">3</span>
+                    <h3 class="question-title">Wie schätzen Sie Ihre digitale Kompetenz ein?</h3>
+                    <div class="options-grid">
+                        <label class="option-item">
+                            <input type="radio" name="digital_competency" value="expert_level">
+                            <div class="option-content">
+                                <span class="option-icon">🚀</span>
+                                Experte - Wir nutzen fortgeschrittene digitale Tools und Analytics
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="digital_competency" value="intermediate">
+                            <div class="option-content">
+                                <span class="option-icon">💼</span>
+                                Fortgeschritten - Grundsolide digitale Fähigkeiten vorhanden
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="digital_competency" value="basic">
+                            <div class="option-content">
+                                <span class="option-icon">📱</span>
+                                Grundlagen - Nutze digitale Tools, aber nicht strategisch
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="digital_competency" value="learning">
+                            <div class="option-content">
+                                <span class="option-icon">📚</span>
+                                Lernbereit - Interesse an digitalen Lösungen, aber wenig Erfahrung
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="digital_competency" value="traditional">
+                            <div class="option-content">
+                                <span class="option-icon">🏛️</span>
+                                Traditionell - Fokus auf bewährte, nicht-digitale Geschäftsmethoden
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question-container">
+                    <span class="question-number">4</span>
+                    <h3 class="question-title">Wie treffen Sie strategische Geschäftsentscheidungen?</h3>
+                    <div class="options-grid">
+                        <label class="option-item">
+                            <input type="radio" name="decision_making" value="data_driven">
+                            <div class="option-content">
+                                <span class="option-icon">📊</span>
+                                Datenbasiert - Entscheidungen basieren auf Analysen und KPIs
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="decision_making" value="consultative">
+                            <div class="option-content">
+                                <span class="option-icon">👥</span>
+                                Beratungsorientiert - Einbeziehung von Experten und Stakeholdern
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="decision_making" value="research_based">
+                            <div class="option-content">
+                                <span class="option-icon">🔍</span>
+                                Forschungsbasiert - Gründliche Marktanalyse vor Entscheidungen
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="decision_making" value="intuitive">
+                            <div class="option-content">
+                                <span class="option-icon">💡</span>
+                                Intuitiv - Vertrauen auf Erfahrung und Geschäftsinstinkt
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="decision_making" value="conservative">
+                            <div class="option-content">
+                                <span class="option-icon">⚖️</span>
+                                Konservativ - Vorsichtige Abwägung aller Risiken und Chancen
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question-container">
+                    <span class="question-number">5</span>
+                    <h3 class="question-title">Was ist Ihre prioritäre Geschäftsherausforderung?</h3>
+                    <div class="options-grid">
+                        <label class="option-item">
+                            <input type="radio" name="primary_challenge" value="customer_acquisition">
+                            <div class="option-content">
+                                <span class="option-icon">🎯</span>
+                                Kundenakquisition - Benötigen mehr qualifizierte Leads
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="primary_challenge" value="revenue_optimization">
+                            <div class="option-content">
+                                <span class="option-icon">💰</span>
+                                Umsatzoptimierung - Höhere Konversionsraten und Kundenwertsteigerung
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="primary_challenge" value="operational_efficiency">
+                            <div class="option-content">
+                                <span class="option-icon">⚡</span>
+                                Betriebseffizienz - Prozessoptimierung und Kostensenkung
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="primary_challenge" value="market_competition">
+                            <div class="option-content">
+                                <span class="option-icon">🏆</span>
+                                Marktpositionierung - Differenzierung von der Konkurrenz
+                            </div>
+                        </label>
+                        <label class="option-item">
+                            <input type="radio" name="primary_challenge" value="digital_transformation">
+                            <div class="option-content">
+                                <span class="option-icon">🔄</span>
+                                Digitale Transformation - Modernisierung von Geschäftsprozessen
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="contact-section">
+                    <h3>Erhalten Sie Ihre Strategieanalyse</h3>
+                    <p class="subtitle">Unsere Experten erstellen eine personalisierte Wachstumsstrategie für Ihr Unternehmen</p>
+                    
+                    <div class="contact-grid">
+                        <div class="input-group">
+                            <label for="firstName">Vorname *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="lastName">Nachname *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                        <div class="input-group contact-full">
+                            <label for="email">Geschäftliche E-Mail-Adresse *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="input-group contact-full">
+                            <label for="businessName">Unternehmensname *</label>
+                            <input type="text" id="businessName" name="businessName" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="position">Position im Unternehmen *</label>
+                            <input type="text" id="position" name="position" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="phone">Telefonnummer (optional)</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="submit-section">
+                    <button type="submit" class="submit-btn">
+                        Kostenlose Strategieanalyse anfordern
+                    </button>
+                    
+                    <div class="privacy-notice">
+                        🔒 Ihre Daten werden vertraulich behandelt und ausschließlich für die Erstellung Ihrer personalisierten Strategieanalyse verwendet. Gemäß DSGVO können Sie jederzeit die Löschung Ihrer Daten beantragen.
+                    </div>
+                </div>
+            </form>
+            
+            <div class="trust-indicators">
+                <div class="trust-item">
+                    <span class="trust-number">500+</span>
+                    <div>Analysierte Unternehmen</div>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-number">200+</span>
+                    <div>Erfolgreiche Implementierungen</div>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-number">15+</span>
+                    <div>Jahre Beratungserfahrung</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Add interactive functionality
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Remove selected class from all options in this question
+                const questionContainer = this.closest('.question-container');
+                questionContainer.querySelectorAll('.option-item').forEach(item => {
+                    item.classList.remove('selected');
+                });
+                
+                // Add selected class to chosen option
+                this.closest('.option-item').classList.add('selected');
+            });
+        });
+
+        // Form submission
+        document.getElementById('strategieAnalyse').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Validate required fields
+            const requiredFields = ['firstName', 'lastName', 'email', 'businessName', 'position'];
+            const missingFields = requiredFields.filter(field => !data[field]);
+            
+            if (missingFields.length > 0) {
+                alert('Bitte füllen Sie alle Pflichtfelder aus.');
+                return;
+            }
+            
+            // Validate that all questions are answered
+            const questions = ['customer_acquisition', 'previous_attempts', 'digital_competency', 'decision_making', 'primary_challenge'];
+            const unansweredQuestions = questions.filter(q => !data[q]);
+            
+            if (unansweredQuestions.length > 0) {
+                alert('Bitte beantworten Sie alle Fragen.');
+                return;
+            }
+            
+            // Generate and show results
+            showResults(data);
+        });
+
+        function showResults(data) {
+            const container = document.querySelector('.container');
+            
+            // Generate professional analysis
+            const analysis = generateAnalysis(data);
+            
+            container.innerHTML = `
+                <header class="header">
+                    <div class="header-content">
+                        <div class="company-logo">BERLIN BUSINESS GROWTH</div>
+                        <h1>Ihre Strategieanalyse</h1>
+                        <p class="subtitle">Personalisierte Wachstumsempfehlungen für ${data.businessName}</p>
+                    </div>
+                </header>
+                
+                <main class="form-section">
+                    <div style="text-align: center; margin-bottom: 40px;">
+                        <h2 style="color: #1e40af; margin-bottom: 16px;">Vielen Dank, ${data.firstName}!</h2>
+                        <p style="font-size: 1.1rem; color: #666;">Ihre detaillierte Strategieanalyse wurde erfolgreich erstellt.</p>
+                    </div>
+                    
+                    <div style="background: #f8fafc; padding: 40px; border-radius: 16px; margin: 32px 0; border-left: 4px solid #1e40af;">
+                        <h3 style="color: #1a1a1a; margin-bottom: 20px; font-size: 1.5rem;">📊 Unternehmensklassifikation</h3>
+                        <div style="background: white; padding: 24px; border-radius: 12px;">
+                            <h4 style="color: #1e40af; margin-bottom: 12px; font-size: 1.25rem;">${analysis.businessType.type}</h4>
+                            <p style="color: #374151; line-height: 1.6;">${analysis.businessType.description}</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f0f9ff; padding: 40px; border-radius: 16px; margin: 32px 0; border-left: 4px solid #0ea5e9;">
+                        <h3 style="color: #1a1a1a; margin-bottom: 24px; font-size: 1.5rem;">🎯 Strategische Empfehlungen</h3>
+                        <div style="display: grid; gap: 16px;">
+                            ${analysis.recommendations.map((rec, index) => `
+                                <div style="background: white; padding: 24px; border-radius: 12px; border-left: 4px solid #0ea5e9;">
+                                    <h4 style="color: #0ea5e9; margin-bottom: 8px;">Empfehlung ${index + 1}</h4>
+                                    <p style="color: #374151; line-height: 1.6;">${rec}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f0fdf4; padding: 40px; border-radius: 16px; margin: 32px 0; border-left: 4px solid #22c55e;">
+                        <h3 style="color: #1a1a1a; margin-bottom: 24px; font-size: 1.5rem;">📋 Implementierungsplan</h3>
+                        <div style="background: white; padding: 24px; border-radius: 12px;">
+                            <ol style="counter-reset: step; list-style: none; padding: 0;">
+                                ${analysis.actionPlan.map(step => `
+                                    <li style="counter-increment: step; margin-bottom: 16px; padding-left: 40px; position: relative;">
+                                        <span style="position: absolute; left: 0; top: 0; background: #22c55e; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem;">
+                                            ${step.split('.')[0]}
+                                        </span>
+                                        <span style="color: #374151; line-height: 1.6;">${step.substring(step.indexOf('.') + 1).trim()}</span>
+                                    </li>
+                                `).join('')}
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #fefce8; padding: 40px; border-radius: 16px; margin: 32px 0; border-left: 4px solid #eab308;">
+                        <h3 style="color: #1a1a1a; margin-bottom: 16px; font-size: 1.5rem;">⚡ Prioritätseinstufung</h3>
+                        <div style="background: white; padding: 24px; border-radius: 12px;">
+                            <h4 style="color: #eab308; margin-bottom: 12px;">Priorität: ${analysis.priority.level}</h4>
+                            <p style="color: #374151; line-height: 1.6; margin-bottom: 16px;">${analysis.priority.description}</p>
+                            <p style="color: #374151; line-height: 1.6;"><strong>Empfohlener Zeitrahmen:</strong> ${analysis.priority.timeframe}</p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin: 50px 0; padding: 40px; background: linear-gradient(135deg, #1e40af, #1e3a8a); border-radius: 16px; color: white;">
+                        <h3 style="margin-bottom: 16px; font-size: 1.5rem;">🎯 Nächster Schritt</h3>
+                        <p style="margin-bottom: 24px; opacity: 0.9; line-height: 1.6;">Möchten Sie diese Strategieempfehlungen in einem persönlichen Beratungsgespräch vertiefen?</p>
+                        <p style="margin-bottom: 24px; opacity: 0.9;">Unsere Experten kontaktieren Sie innerhalb von 24 Stunden für ein kostenloses 30-minütiges Strategiegespräch.</p>
+                        <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 12px; margin: 20px 0;">
+                            <p style="margin: 0; font-weight: 600;">✅ Detaillierte Analyse wurde per E-Mail versendet</p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin: 40px 0; padding: 30px; background: #f8fafc; border-radius: 12px;">
+                        <h4 style="color: #1a1a1a; margin-bottom: 16px;">Über Berlin Business Growth</h4>
+                        <p style="color: #666; line-height: 1.6; max-width: 600px; margin: 0 auto;">
+                            Seit über 15 Jahren unterstützen wir Berliner Unternehmen bei strategischen Wachstumsinitiativen. 
+                            Unsere datenbasierte Herangehensweise hat bereits über 200 Unternehmen zu nachhaltigem Erfolg verholfen.
+                        </p>
+                    </div>
+                </main>
+            `;
+        }
+
+        function generateAnalysis(data) {
+            // Professional business type classification
+            const businessType = classifyBusiness(data);
+            const recommendations = generateRecommendations(data, businessType);
+            const actionPlan = generateActionPlan(data, businessType);
+            const priority = calculatePriority(data);
+            
+            return {
+                businessType,
+                recommendations,
+                actionPlan,
+                priority
+            };
+        }
+
+        function classifyBusiness(data) {
+            const acquisition = data.customer_acquisition;
+            const competency = data.digital_competency;
+            const decision = data.decision_making;
+            
+            if (competency === 'expert_level' && decision === 'data_driven') {
+                return {
+                    type: 'Digital-Native Unternehmen',
+                    description: 'Ihr Unternehmen verfügt über fortgeschrittene digitale Kompetenzen und nutzt bereits datenbasierte Entscheidungsprozesse. Sie sind ideal positioniert für erweiterte Wachstumsstrategien und Marktführerschaft.'
+                };
+            } else if (competency === 'traditional' && acquisition === 'foot_traffic') {
+                return {
+                    type: 'Traditionelles Unternehmen mit Digitalisierungspotential',
+                    description: 'Ihr Unternehmen hat eine starke lokale Marktposition aufgebaut. Durch strategische Digitalisierung können Sie Ihre Reichweite signifikant erweitern und neue Kundensegmente erschließen.'
+                };
+            } else if (competency === 'learning' || competency === 'basic') {
+                return {
+                    type: 'Wachstumsorientiertes Hybrid-Unternehmen',
+                    description: 'Ihr Unternehmen befindet sich in einer idealen Position für strukturiertes Wachstum. Mit der richtigen Strategie können Sie traditionelle Stärken mit modernen Ansätzen kombinieren.'
+                };
+            } else {
+                return {
+                    type: 'Strategisch entwicklungsfähiges Unternehmen',
+                    description: 'Ihr Unternehmen verfügt über solide Grundlagen und erhebliches Potenzial für strategisches Wachstum durch optimierte Prozesse und erweiterte Marktpräsenz.'
+                };
+            }
+        }
+
+        function generateRecommendations(data, businessType) {
+            const recommendations = [];
+            
+            // Based on customer acquisition
+            if (data.customer_acquisition === 'foot_traffic') {
+                recommendations.push('Implementierung einer hybriden Kundenakquisitionsstrategie, die Ihre starke lokale Präsenz mit digitalen Kanälen kombiniert, um die Reichweite um 40-60% zu steigern.');
+            } else if (data.customer_acquisition === 'word_of_mouth') {
+                recommendations.push('Systematisierung Ihres Empfehlungsmarketings durch strukturierte Kundenbindungsprogramme und digitale Bewertungsmanagement-Systeme.');
+            } else if (data.customer_acquisition === 'digital_marketing') {
+                recommendations.push('Optimierung Ihrer digitalen Marketing-ROI durch Advanced Analytics und zielgruppenspezifische Kampagnenautomatisierung.');
+            }
+            
+            // Based on digital competency
+            if (data.digital_competency === 'expert_level') {
+                recommendations.push('Implementierung von Machine Learning und KI-gestützten Vorhersagemodellen für Kundenverhalten und Markttrends.');
+            } else if (data.digital_competency === 'traditional') {
+                recommendations.push('Schrittweise digitale Transformation mit benutzerfreundlichen Systemen und umfassendem Schulungsprogramm für nachhaltigen Erfolg.');
+            }
+            
+            // Based on primary challenge
+            if (data.primary_challenge === 'customer_acquisition') {
+                recommendations.push('Entwicklung eines Multi-Channel-Akquisitionstrichters mit automatisierten Lead-Nurturing-Sequenzen und Konversionsoptimierung.');
+            } else if (data.primary_challenge === 'revenue_optimization') {
+                recommendations.push('Implementierung von Dynamic Pricing-Strategien und Customer Lifetime Value-Optimierung durch personalisierte Upselling-Systeme.');
+            } else if (data.primary_challenge === 'market_competition') {
+                recommendations.push('Entwicklung einer differenzierten Marktpositionierung durch Unique Value Proposition und strategisches Brand Building.');
+            }
+            
+            return recommendations.slice(0, 3);
+        }
+
+        function generateActionPlan(data, businessType) {
+            const plan = [
+                '1. Analyse der aktuellen Marktposition und Wettbewerbslandschaft (Woche 1-2)',
+                '2. Entwicklung der strategischen Roadmap mit priorisierten Maßnahmen (Woche 3)',
+                '3. Implementierung der ersten Phase mit Quick-Win-Initiativen (Woche 4-6)',
+                '4. Etablierung von KPI-Monitoring und Performance-Tracking (Woche 7)',
+                '5. Skalierung erfolgreicher Maßnahmen und kontinuierliche Optimierung (fortlaufend)'
+            ];
+            
+            if (data.digital_competency === 'traditional') {
+                plan.splice(2, 0, '2.5. Schulung des Teams in digitalen Grundlagen und Change Management');
+            }
+            
+            return plan;
+        }
+
+        function calculatePriority(data) {
+            let score = 0;
+            
+            if (data.primary_challenge === 'customer_acquisition') score += 3;
+            if (data.previous_attempts === 'no_marketing') score += 2;
+            if (data.digital_competency === 'traditional') score += 2;
+            if (data.decision_making === 'data_driven') score -= 1; // Lower urgency for data-driven companies
+            
+            if (score >= 5) {
+                return {
+                    level: 'HOCH',
+                    description: 'Ihr Unternehmen würde von sofortigen strategischen Maßnahmen erheblich profitieren.',
+                    timeframe: 'Implementierung in den nächsten 2-4 Wochen empfohlen'
+                };
+            } else if (score >= 3) {
+                return {
+                    level: 'MITTEL',
+                    description: 'Strukturierte Wachstumsmaßnahmen werden signifikante Verbesserungen erzielen.',
+                    timeframe: 'Implementierung in den nächsten 4-8 Wochen optimal'
+                };
+            } else {
+                return {
+                    level: 'STANDARD',
+                    description: 'Optimierungsmaßnahmen werden nachhaltiges Wachstum fördern.',
+                    timeframe: 'Implementierung in den nächsten 2-3 Monaten'
+                };
+            }
+        }
+    </script>
+</body>
+</html>
